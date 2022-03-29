@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+}
+
+body {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+}
+
+header {
+  background-color: rgb(174, 108, 236);
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  padding: 10px;
+  color: aliceblue;
+  text-align: center;
+}
