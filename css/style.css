@@ -13,3 +13,67 @@ header {
   color: aliceblue;
   text-align: center;
 }
+
+main {
+  padding: 30px 50px;
+}
+
+.card {
+  background-color: aliceblue;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+
+.lineInput {
+  display: grid;
+  margin-bottom: 10px;
+}
+
+input { 
+  padding: 10px ;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  outline: none;
+}
+
+button {
+  border: none;
+  padding: 10px;
+  outline: none;
+  background-color:rgb(174, 108, 236);
+  color: aliceblue;
+  border-radius: 3px;
+  font-weight: bold;
+  transition: all ease 0.3s;
+}
+
+button:hover {
+  background-color:rgb(145, 85, 202);
+}
+
+.content {
+  margin-top: 15px;
+}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+table th {
+  background-color: rgb(229, 226, 226);
+  text-align: center;
+}
+
+table td,th {
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+table td img {
+    width: 22px;
+    padding: 5px;
+}
