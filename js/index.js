@@ -37,7 +37,8 @@ class Produto {
 
       let imgDelete = document.createElement('img');
       imgDelete.src = 'assets/img/deletar-lixeira.png';
-      td_acoes.appendChild(imgDelete)
+      td_acoes.appendChild(imgDelete);
+      imgDelete.setAttribute("onClick", "produto.deletar(" + this.arrayProdutos[i].id + ")");
 
     }
 
@@ -79,6 +80,17 @@ class Produto {
   cancelar() {
     document.getElementById('produto').value = '';
     document.getElementById('valor').value = '';
+  }
+
+  deletar(id) {
+    let tbody = document.getElementById('tbody');
+
+    for (let i = 0; i < this.arrayProdutos.length; i++) {
+      if (this.arrayProdutos[i].id == id) {
+        this.arrayProdutos.splice(i, 1);
+        tbody.deleteRow(i)
+      }
+    }
   }
 }
 
