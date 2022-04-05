@@ -1,90 +1,90 @@
 
-class Produto {
+class Product {
   constructor() {
     this.id = 1;
-    this.arrayProdutos = [];
+    this.arrayProducts = [];
     this.editId = null;
   }
 
-  salvar() {
-    let produto = this.lerDados();
+  saveItem() {
+    let product = this.readData();
 
-    if (this.validaCampos(produto)) {
+    if (this.fieldValidate(product)) {
       if (this.editId == null) {
-        this.adicionar(produto)
+        this.addItem(product)
       }else {
-        this.atualizar(this.editId, produto);
+        this.updateItem(this.editId, product);
       }
 
     }
-    this.listaTabela();
-    this.cancelar();
+    this.listTable();
+    this.cancelItem();
   }
 
-  listaTabela() {
+  listTable() {
     let tbody = document.getElementById('tbody')
     tbody.innerText = ''
 
-    for (let i = 0; i < this.arrayProdutos.length; i++) {
+    for (let i = 0; i < this.arrayProducts.length; i++) {
       let tr = tbody.insertRow();
 
       let td_id = tr.insertCell();
-      let td_produto = tr.insertCell();
-      let td_valor = tr.insertCell();
-      let td_acoes = tr.insertCell();
+      let td_product = tr.insertCell();
+      let td_price = tr.insertCell();
+      let td_actions = tr.insertCell();
 
-      td_id.innerText = this.arrayProdutos[i].id;
-      td_produto.innerText = this.arrayProdutos[i].nomeProduto;
-      td_valor.innerText = this.arrayProdutos[i].valor;
+      td_id.innerText = this.arrayProducts[i].id;
+      td_product.innerText = this.arrayProducts[i].nameProduct;
+      td_price.innerText = this.arrayProducts[i].price;
 
       let imgEdit = document.createElement('img');
       imgEdit.src = 'assets/img/editar.png';
-      td_acoes.appendChild(imgEdit);
-      imgEdit.setAttribute("onClick", "produto.prepararEdit(" + JSON.stringify(this.arrayProdutos[i]) + ")");
+      td_actions.appendChild(imgEdit);
+      imgEdit.setAttribute("onClick", "product.preEditItem(" + JSON.stringify(this.arrayProducts[i]) + ")");
 
       let imgDelete = document.createElement('img');
       imgDelete.src = 'assets/img/deletar-lixeira.png';
-      td_acoes.appendChild(imgDelete);
-      imgDelete.setAttribute("onClick", "produto.deletar(" + this.arrayProdutos[i].id + ")");
+      td_actions.appendChild(imgDelete);
+      imgDelete.setAttribute("onClick", "product.deleteItem(" + this.arrayProducts[i].id + ")");
     }
 
   }
 
-  adicionar(produto) {
-    produto.valor = parseFloat(produto.valor);
-    this.arrayProdutos.push(produto);
+  addItem(product) {
+    product.price = parseFloat(product.price);
+    this.arrayProducts.push(product);
     this.id++;
   }
 
-  atualizar(id, produto) {
-    console.log(id,produto)
-    for (let i =0; i < this.arrayProdutos.length; i++){
-      if (this.arrayProdutos[i].id == id) {
-        this.arrayProdutos[i].nomeProduto = produto.nomeProduto;
-        console.log(this.arrayProdutos[i])
-        this.arrayProdutos[i].valor = produto.valor;
+  updateItem(id, product) {
+    console.log(id,product)
+    for (let i =0; i < this.arrayProducts.length; i++){
+      if (this.arrayProducts[i].id == id) {
+        this.arrayProducts[i].nameProduct = product.nameProduct;
+        console.log(this.arrayProducts[i])
+        this.arrayProducts[i].price = product.price;
       }
     }
   }
 
-  lerDados() {
-    let produto = {}
+  readData() {
+    let product = {}
 
-    produto.id = this.id;
-    produto.nomeProduto = document.getElementById('produto').value;
-    produto.valor = document.getElementById('valor').value;
+    product.id = this.id;
+    product.nameProduct = document.getElementById('product').value;
+    product.price = document.getElementById('price').value;
 
-    return produto
+    return product
   }
 
-  validaCampos(produto) {
+  fieldValidate(product) {
     let errorAlert = '';
-    if (produto.nomeProduto == '') {
+    if (product.nameProduct == '') {
       errorAlert += '- Informe o nome do produto \n';
     }
 
-    if (produto.valor == '') {
-      errorAlert += '- Informe o valor do produto';
+    if (product.price == '') {
+      errorAlert += '- Informe o preço do produto';
     }
 
     if (errorAlert != '') {
@@ -95,36 +95,36 @@ class Produto {
     return true;
   }
 
-  cancelar() {
-    document.getElementById('produto').value = '';
-    document.getElementById('valor').value = '';
+  cancelItem() {
+    document.getElementById('product').value = '';
+    document.getElementById('price').value = '';
 
-    document.getElementById('btnSalvar').innerText = 'Salvar';
+    document.getElementById('btnSaveItem').innerText = 'Salvar';
     this.editId = null;
   }
 
-  deletar(id) {
+  deleteItem(id) {
     if (confirm('Deseja realmente deletar o produto do ID ' + id + ' ?')) {
 
       let tbody = document.getElementById('tbody');
 
-      for (let i = 0; i < this.arrayProdutos.length; i++) {
-        if (this.arrayProdutos[i].id == id) {
-          this.arrayProdutos.splice(i, 1);
+      for (let i = 0; i < this.arrayProducts.length; i++) {
+        if (this.arrayProducts[i].id == id) {
+          this.arrayProducts.splice(i, 1);
           tbody.deleteRow(i);
         }
       }
     }
   }
 
-  prepararEdit(JSONdata) {
+  preEditItem(JSONdata) {
     this.editId = JSONdata.id;
 
-    document.getElementById('produto').value = JSONdata.nomeProduto;
-    document.getElementById('valor').value = JSONdata.valor;
-    document.getElementById('btnSalvar').innerText = 'Atualizar';
+    document.getElementById('product').value = JSONdata.nameProduct;
+    document.getElementById('price').value = JSONdata.price;
+    document.getElementById('btnSaveItem').innerText = 'Atualizar';
   }
 
 }
 
-var produto = new Produto();
+var product = new Product();
